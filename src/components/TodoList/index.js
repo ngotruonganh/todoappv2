@@ -5,12 +5,20 @@ import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { todosRemainingSelector } from "../../redux/selectors";
 import todoListSlice from "./todosSlice";
+import { CSVLink } from "react-csv";
+import Sort from "../Sort";
 
 export default function TodoList() {
   const [todoName, setTodoName] = useState("");
   const [priority, setPriority] = useState("Medium");
 
   const todoList = useSelector(todosRemainingSelector);
+
+  const headers = [
+    { label: "Name", key: "name" },
+    { label: "Completed", key: "completed" },
+    { label: "Priority", key: "priority" },
+  ];
 
   const dispatch = useDispatch();
 
@@ -32,7 +40,6 @@ export default function TodoList() {
   };
 
   const handleInputChange = (e) => {
-    console.log("handleInputChange", e.target.value);
     setTodoName(e.target.value);
   };
 
@@ -41,10 +48,15 @@ export default function TodoList() {
   };
 
   return (
-    <Row style={{ height: "calc(100% - 40px)", overflowY: "hidden" }}>
+    <Row style={{ height: "calc(70vh - 120px)", overflowY: "hidden" }}>
+      <Sort />
       <Col
         span={24}
-        style={{ height: "calc(100% - 40px)", overflowY: "scroll" }}
+        style={{
+          height: "calc(100% - 150px)",
+          overflowY: "scroll",
+          marginTop: "20px",
+        }}
       >
         {todoList.map((todo) => (
           <Todo
@@ -56,6 +68,12 @@ export default function TodoList() {
           />
         ))}
       </Col>
+      <CSVLink data={todoList} filename={"my-file.csv"} headers={headers}>
+        <Button>Import</Button>
+      </CSVLink>
+      <CSVLink data={todoList} filename={"my-file.csv"} headers={headers}>
+        <Button>Export</Button>
+      </CSVLink>
       <Col span={24}>
         <Form onSubmit={handleAddButtonClick}>
           <Input.Group style={{ display: "flex" }} compact>
