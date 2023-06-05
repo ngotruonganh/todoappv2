@@ -19,6 +19,10 @@ export default function Todo({ name, prioriry, completed, id }) {
     dispatch(todoListSlice.actions.toggleTodoStatus(id));
   };
 
+  const deleteTodo = () => {
+    dispatch(todoListSlice.actions.deleteTodo(id));
+  };
+
   return (
     <Row
       justify="space-between"
@@ -36,9 +40,7 @@ export default function Todo({ name, prioriry, completed, id }) {
         span={4}
         style={{
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          textAlign: "center",
+          justifyContent: "flex-end",
         }}
       >
         <Tag
@@ -49,10 +51,12 @@ export default function Todo({ name, prioriry, completed, id }) {
             justifyContent: "center",
             alignContent: "center",
             textAlign: "center",
+            width: "100px",
           }}
         >
           {prioriry}
         </Tag>
+        <Tag onClick={deleteTodo}>Delete</Tag>
       </Col>
     </Row>
   );
