@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export default createSlice({
-  name: 'filters',
+  name: "filters",
   initialState: {
-    search: '',
-    status: 'All',
+    search: "",
+    status: "All",
     priorities: [],
   },
   reducers: {
