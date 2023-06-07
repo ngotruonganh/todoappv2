@@ -3,8 +3,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import filtersSlice from "./filtersSlice";
 
-const { Search } = Input;
-
 export default function Filters() {
   const dispatch = useDispatch();
 
@@ -35,8 +33,8 @@ export default function Filters() {
         >
           Search
         </Typography.Paragraph>
-        <Search
-          placeholder="input search text"
+        <Input
+          placeholder="Input search text"
           value={searchText}
           onChange={handleSearchTextChange}
         />
@@ -48,9 +46,15 @@ export default function Filters() {
           Filter By Status
         </Typography.Paragraph>
         <Radio.Group value={filterStatus} onChange={handleStatusChange}>
-          <Radio value="All">All</Radio>
-          <Radio value="Completed">Completed</Radio>
-          <Radio value="Todo">To do</Radio>
+          <Radio value="All" defaultChecked disabled={filterStatus === "All"}>
+            All
+          </Radio>
+          <Radio value="Completed" disabled={filterStatus === "Completed"}>
+            Completed
+          </Radio>
+          <Radio value="Todo" disabled={filterStatus === "Todo"}>
+            To do
+          </Radio>
         </Radio.Group>
       </Col>
       <Col sm={24}>

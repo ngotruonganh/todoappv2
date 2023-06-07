@@ -1,4 +1,4 @@
-import { Col, Radio, Row } from "antd";
+import { Col, Radio, Row, Typography } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import todosSlice from "../TodoList/todosSlice";
@@ -16,10 +16,19 @@ export default function Sort() {
   return (
     <Row>
       <Col>
+        <Typography.Paragraph style={{ fontWeight: "bold", marginTop: 5 }}>
+          Sort
+        </Typography.Paragraph>
         <Radio.Group onChange={onChange} value={value}>
-          <Radio value={"id"}>Newest</Radio>
-          <Radio value={"az"}>A - Z</Radio>
-          <Radio value={"za"}>Z - A</Radio>
+          <Radio value="id" disabled={value === "id"}>
+            Newest
+          </Radio>
+          <Radio value="az" disabled={value === "az"}>
+            A - Z
+          </Radio>
+          <Radio value="za" disabled={value === "za"}>
+            Z - A
+          </Radio>
         </Radio.Group>
       </Col>
     </Row>

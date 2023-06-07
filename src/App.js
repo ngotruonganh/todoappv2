@@ -1,4 +1,4 @@
-import { Typography, Divider, Row, Col } from "antd";
+import { Typography, Row, Col } from "antd";
 import TodoList from "./components/TodoList";
 import Filters from "./components/Filters";
 
@@ -21,10 +21,9 @@ function App() {
         }}
       >
         <Title style={{ textAlign: "center" }}>
-          TODO APP with REDUX Toolkit
+          TO-DO APP with REDUX Toolkit
         </Title>
         <Filters />
-        <Divider />
         <TodoList />
       </Col>
     </Row>

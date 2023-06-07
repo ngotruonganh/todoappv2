@@ -1,11 +1,10 @@
-import { Col, Row, Input, Button, Select, Tag, Form } from "antd";
+import { Col, Row, Input, Button, Select, Tag, Form, Divider } from "antd";
 import Todo from "../Todo";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { todosRemainingSelector } from "../../redux/selectors";
 import todoListSlice from "./todosSlice";
-import { CSVLink } from "react-csv";
 import Sort from "../Sort";
 
 export default function TodoList() {
@@ -13,12 +12,6 @@ export default function TodoList() {
   const [priority, setPriority] = useState("Medium");
 
   const todoList = useSelector(todosRemainingSelector);
-
-  const headers = [
-    { label: "Name", key: "name" },
-    { label: "Completed", key: "completed" },
-    { label: "Priority", key: "priority" },
-  ];
 
   const dispatch = useDispatch();
 
@@ -50,10 +43,11 @@ export default function TodoList() {
   return (
     <Row style={{ height: "calc(70vh - 120px)", overflowY: "hidden" }}>
       <Sort />
+      <Divider />
       <Col
         span={24}
         style={{
-          height: "calc(100% - 150px)",
+          height: "calc(100% - 200px)",
           overflowY: "scroll",
           marginTop: "20px",
         }}
@@ -68,12 +62,6 @@ export default function TodoList() {
           />
         ))}
       </Col>
-      <CSVLink data={todoList} filename={"my-file.csv"} headers={headers}>
-        <Button>Import</Button>
-      </CSVLink>
-      <CSVLink data={todoList} filename={"my-file.csv"} headers={headers}>
-        <Button>Export</Button>
-      </CSVLink>
       <Col span={24}>
         <Form onSubmit={handleAddButtonClick}>
           <Input.Group style={{ display: "flex" }} compact>
